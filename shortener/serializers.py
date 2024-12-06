@@ -34,7 +34,7 @@ class URLStatsSerializer(serializers.ModelSerializer):
         model = URL
         fields = ('short_url', )
 
-    # def validate_short_url(self, value):
-    #     if not URL.objects.filter(short_url=value).exists():
-    #         raise serializers.ValidationError("Invalid short URL")
-    #     return value
+    def validate_short_url(self, value):
+        if not URL.objects.filter(short_url=value).exists():
+            raise serializers.ValidationError("Invalid short URL")
+        return value

@@ -41,18 +41,13 @@ class ShortenURLView(APIView):
                 },
                 status=status.HTTP_201_CREATED,
             )
-            # serializer.save()
-            # return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class RedirectURLView(APIView):
     def get(self, request, short_url):
-        # breakpoint()
         shortened_url = get_object_or_404(URL, short_url=short_url)
-
         if shortened_url.is_expired():
             return Response({"error": "This URL has expired."}, status=status.HTTP_410_GONE)
-
         shortened_url.access_count += 1
         shortened_url.save()
         return redirect(shortened_url.original_url)
@@ -88,15 +83,12 @@ class CustomShortenedURLAPIView(APIView):
                 {"error": "Provided short URL is not a valid URL."},
                 status=status.HTTP_400_BAD_REQUEST
             )
-
-        # Check if the custom short URL already exists
+        # For checking if the custome short URL is already being used
         if URL.objects.filter(short_url=custom_short_url).exists():
             return Response(
                 {"error": "Custom short URL already exists. Try some other short URL."},
                 status=status.HTTP_400_BAD_REQUEST
             )
-
-        # Save the URL to the database
         serializer = CustomURLShortenerSerializer(data={
             "original_url": original_url,
             "short_url": custom_short_url,
@@ -116,9 +108,6 @@ class URLStatsView(APIView):
     """
     serializer_class = URLStatsSerializer
     def post(self, request):
-        """
-        Handle POST requests to retrieve URL statistics.
-        """
         short_url = request.data.get('short_url')
         
         if not short_url:
@@ -126,21 +115,11 @@ class URLStatsView(APIView):
                 {"error": "The 'short_url' field is required."},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        
-        # Fetch the URL object or return 404 if not found
-        # Remove BASEURL prefix if it exists
         if short_url.startswith(BASEURL):
             short_url = short_url[len(BASEURL):]
-        # Fetch the URL object or return 404 if not found
         url_stats = get_object_or_404(URL, short_url=short_url)
-        # Serialize the data
         serializer = URLStatsSerializer(url_stats)
-        
-        # Return the serialized data
-        print()
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-    
 
 
 class HomePageView(TemplateView):
