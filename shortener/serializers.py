@@ -22,3 +22,19 @@ class URLShortenerSerializer(serializers.ModelSerializer):
         expires_at = now() + timedelta(days=ttl) if ttl else None
         url_instance = URL.objects.create(expires_at=expires_at, **validated_data)
         return url_instance
+    
+class CustomURLShortenerSerializer(serializers.ModelSerializer):
+    TTL = serializers.IntegerField(min_value=1, required=False)
+    class Meta:
+        model = URL
+        fields = ('original_url', 'short_url', 'TTL')
+    
+class URLStatsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = URL
+        fields = ('short_url', )
+
+    # def validate_short_url(self, value):
+    #     if not URL.objects.filter(short_url=value).exists():
+    #         raise serializers.ValidationError("Invalid short URL")
+    #     return value
