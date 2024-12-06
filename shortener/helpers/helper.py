@@ -3,19 +3,16 @@ import validators
 import random, string
 
 def validate_url(url):
-    # Check if the URL starts with a valid scheme
     if not url.startswith(('http://', 'https://')):
         raise ValueError("URL must start with http:// or https://")
 
-    # Validate using the validators library (more comprehensive)
     if not validators.url(url):
         raise ValueError("Provided URL is not a valid URL.")
 
-    # Optionally, add a regex check for custom requirements
     url_pattern = re.compile(
-        r'^(http|https)://'  # Scheme
-        r'([\w-]+\.)+[\w-]{2,4}'  # Domain
-        r'(/[\w\-./?%&=]*)?$'  # Path
+        r'^(http|https)://' 
+        r'([\w-]+\.)+[\w-]{2,4}' 
+        r'(/[\w\-./?%&=]*)?$' 
     )
     if not url_pattern.match(url):
         raise ValueError("URL does not match the required pattern.")
