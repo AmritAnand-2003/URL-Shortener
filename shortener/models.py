@@ -7,7 +7,7 @@ def default_expiry():
 
 # Create your models here.
 class URL(models.Model):
-    original_url = models.URLField(unique=True)
+    original_url = models.URLField()
     short_url = models.CharField(unique=True, max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     access_count = models.IntegerField(default=0)
