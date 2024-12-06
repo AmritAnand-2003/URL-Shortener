@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django_cron',
     'shortener',
     'rest_framework',
+    
 ]
 
 MIDDLEWARE = [
@@ -68,6 +70,10 @@ TEMPLATES = [
         },
     },
 ]
+
+# CRONJOBS = [
+#     ('0 0 * * *', 'shortener.delete_expired_urls'),
+# ]
 
 WSGI_APPLICATION = 'url_shortener_service.wsgi.application'
 
