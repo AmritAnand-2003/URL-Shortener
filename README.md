@@ -48,7 +48,7 @@ The URL shortener app follows a basic approach:
 To set up the application, follow these steps:
 
 1. Clone the repository: 
-   git clone https://github.com/yourusername/url-shortener.git
+   git clone [https://github.com/yourusername/url-shortener.git](https://github.com/AmritAnand-2003/URL-Shortener)
    cd url-shortener
 
 2. Create and Activate a Virtual Environment: 
