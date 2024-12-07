@@ -34,8 +34,6 @@ This is a **simple and efficient URL shortener** web application built with Djan
 ## 🛠️ Challenges Faced
 
 1. **URL Generation**: Choosing an efficient and collision-free algorithm for shortening URLs was critical.
-2. **Handling Expirations**: Managing time zones and ensuring expired URLs are correctly identified required meticulous testing.
-3. **Migrations**: Initial hiccups in database migrations were resolved with careful schema planning.
 
 ---
 
