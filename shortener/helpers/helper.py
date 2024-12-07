@@ -1,8 +1,9 @@
 import re
 import validators
 import random, string
-from shortener.models import URL
+from shortener.models import URL, URLCounter
 from django.db import transaction
+
 
 def validate_url(url):
     if not url.startswith(('http://', 'https://')):
@@ -17,6 +18,13 @@ def validate_url(url):
     if not url_pattern.match(url):
         raise ValueError("URL does not match the required pattern.")
     return url
+
+def generate_short_url():
+    with transaction.atomic():
+        url_counter = URLCounter.objects.select_for_update().get(id=1)
+        next_id = url_counter.get_next_id()
+    short_url = base_62_encode(next_id)
+    return short_url
 
 
 def create_shortened_url(serializer):
@@ -48,15 +56,9 @@ def base_62_encode(number):
         result = chars[remainder] + result
     return result
 
-def generate_short_url(url, length=7):
-    # Generate a short URL using a custom algorithm
-    prefix = "http://127.0.0.1:8000/"
-    # Remove the scheme from the URL
+def generate_short_url_random(url, length=7):
+    # For generating random short URL
     url = re.sub(r'^https?://', '', url)
-
-    # Generate a random string of the specified length
     short_code = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
-
-    # Combine the short code with the URL
     url = short_code
     return url

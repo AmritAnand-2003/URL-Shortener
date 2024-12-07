@@ -18,3 +18,11 @@ class URL(models.Model):
     
     def is_expired(self):
         return now() > self.expires_at
+    
+class URLCounter(models.Model):
+    counter = models.BigIntegerField(default=100000000001)
+    
+    def get_next_id(self):
+        self.counter += 1
+        self.save()
+        return self.counter
