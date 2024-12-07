@@ -19,7 +19,7 @@ class URLShortenerSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         ttl = validated_data.pop('TTL', None)
-        expires_at = now() + timedelta(days=ttl) if ttl else None
+        expires_at = now() + timedelta(days=ttl) if ttl else now() + timedelta(days=365)
         url_instance = URL.objects.create(expires_at=expires_at, **validated_data)
         return url_instance
     

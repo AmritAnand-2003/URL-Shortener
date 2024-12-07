@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import URL
 from .serializers import URLShortenerSerializer, CustomURLShortenerSerializer, URLStatsSerializer
-from .helpers.helper import generate_short_url
+from .helpers.helper import create_shortened_url
 from .constants import BASEURL
 from .helpers.helper import validate_url
 
@@ -26,13 +26,8 @@ class ShortenURLView(APIView):
                     {"short_url": BASEURL +  url_entry.short_url, "message": "URL already exists."},
                     status=status.HTTP_200_OK
                 )
-            short_url = generate_short_url(original_url)
-            while URL.objects.filter(short_url=short_url).exists():
-                short_url = generate_short_url(original_url)
-
-            serializer.validated_data['short_url'] = short_url
-            shortened_url = serializer.save()
-
+            breakpoint()
+            shortened_url = create_shortened_url(serializer)
             return Response(
                 {
                     "original_url": shortened_url.original_url,
