@@ -1,12 +1,13 @@
 # 🌐 URL Shortener Web App
 
-This is a **simple and efficient URL shortener** web application built with Django. It allows users to shorten long URLs, track usage statistics, and manage expiration times. The app also includes a scheduled job to automatically delete expired URLs.
+This is a **simple and efficient URL shortener** web application built with Django. It allows users to shorten long URLs, assign custom short URLs, track usage statistics, and manage expiration times. The app also includes a scheduled job to automatically delete expired URLs.
 
 ---
 
 ## 🚀 Key Features
 
 - **🔗 Shorten URLs**: Convert long URLs into short, unique links.
+- **✨ VIP Custom Shortening: Users can assign a custom short URL for their links. If the custom short URL already exists, the system reuses it.
 - **⏳ URL Expiration**: Set an expiration time (TTL) for each shortened URL.
 - **🗄️ Database**: Persistent storage using SQLite for URL mappings and metadata.
 - **⚙️ Automatic Cleanup**: Expired URLs are deleted daily via a cron job.
@@ -92,7 +93,6 @@ python manage.py runserver
 
 - **Django**: Backend framework for building the web application.
 - **SQLite**: Lightweight database for storing URL mappings.
-- **HTML/CSS**: For the frontend interface.
 - **Cron**: Scheduling tool for managing expired URLs.
 
 ---
