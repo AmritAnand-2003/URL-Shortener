@@ -1,7 +1,3 @@
-Here’s a beautified and well-structured version of your README file with proper setup instructions and copy buttons for easier execution:
-
----
-
 # 🌐 URL Shortener Web App
 
 This is a **simple and efficient URL shortener** web application built with Django. It allows users to shorten long URLs, track usage statistics, and manage expiration times. The app also includes a scheduled job to automatically delete expired URLs.
