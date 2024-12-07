@@ -47,23 +47,23 @@ The URL shortener app follows a basic approach:
 
 To set up the application, follow these steps:
 
-1. Clone the repository:
+1. Clone the repository: 
    git clone https://github.com/yourusername/url-shortener.git
    cd url-shortener
 
-2. Create and Activate a Virtual Environment
+2. Create and Activate a Virtual Environment: 
 python3 -m venv env
 source env/bin/activate  
 
 
-3. Install Dependencies
+3. Install Dependencies: 
 pip install -r requirements.txt
 
 4. Apply Migrations
-Run the following commands to create the database and apply migrations:
+Run the following commands to create the database and apply migrations: 
 python manage.py makemigrations
 python manage.py migrate
 
-5. Start the Development Server
+6. Start the Development Server: 
 python manage.py runserver
 
