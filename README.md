@@ -29,6 +29,9 @@ This is a **simple and efficient URL shortener** web application built with Djan
 4. **Database**: 
    - SQLite is used for simplicity, making the application lightweight and easy to set up.
 
+5. **Access Statistics**
+   - Tracks and displays the number of times a shortened URL has been accessed.
+
 ---
 
 🌐 Live Application
@@ -53,7 +56,7 @@ You can access the application and explore its API through the Django REST Frame
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/yourusername/url-shortener.git
+git clone https://github.com/AmritAnand-2003/URL-Shortener
 cd url-shortener
 ```
 
@@ -110,7 +113,6 @@ python manage.py runserver
 ## 🎯 Future Improvements
 
 - **🔍 Analytics Dashboard**: Track usage statistics for each shortened URL.
-- **📊 Access Statistics**: Show how often each URL has been accessed.
 - **🔒 Authentication**: Add user accounts for personalized URL management.
 
 ---
