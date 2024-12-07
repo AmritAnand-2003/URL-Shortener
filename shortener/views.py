@@ -26,7 +26,6 @@ class ShortenURLView(APIView):
                     {"short_url": BASEURL +  url_entry.short_url, "message": "URL already exists."},
                     status=status.HTTP_200_OK
                 )
-            breakpoint()
             shortened_url = create_shortened_url(serializer)
             return Response(
                 {
