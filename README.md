@@ -7,7 +7,7 @@ This is a **simple and efficient URL shortener** web application built with Djan
 ## 🚀 Key Features
 
 - **🔗 Shorten URLs**: Convert long URLs into short, unique links.
-- **✨ VIP Custom Shortening: Users can assign a custom short URL for their links. If the custom short URL already exists, the system reuses it.
+- ✨ VIP Custom Shortening: Users can assign a custom short URL for their links. If the custom short URL already exists, the system reuses it.
 - **⏳ URL Expiration**: Set an expiration time (TTL) for each shortened URL.
 - **🗄️ Database**: Persistent storage using SQLite for URL mappings and metadata.
 - **⚙️ Automatic Cleanup**: Expired URLs are deleted daily via a cron job.
