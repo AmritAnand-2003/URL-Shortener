@@ -1,69 +1,118 @@
-# URL Shortener Web App
+# 🌐 URL Shortener Web App
 
-This is a simple URL shortener web application built using Django. The application allows users to shorten long URLs and manage them. The app also includes an automatic cron job to delete expired URLs.
+This is a **simple and efficient URL shortener** web application built with Django. It allows users to shorten long URLs, assign custom short URLs, track usage statistics, and manage expiration times. The app also includes a scheduled job to automatically delete expired URLs.
 
-## Approach
+---
 
-The URL shortener app follows a basic approach:
+## 🚀 Key Features
 
-- **URL Generation**: When a user submits a long URL, a unique shortened URL is generated and saved in the database.
-- **Expiration Time**: Each shortened URL has an expiration time (TTL), after which the URL becomes invalid and is deleted.
-- **Database**: The application uses SQLite as the database to store URL mappings and other metadata.
-- **Expiration Cron Job**: A cron job is implemented to run daily and delete expired URLs automatically.
+- **🔗 Shorten URLs**: Convert long URLs into short, unique links.
+- **✨ VIP Custom Shortening**: Users can assign a custom short URL for their links. If the custom short URL already exists, the system reuses it.
+- **⏳ URL Expiration**: Set an expiration time (TTL) for each shortened URL.
+- **🗄️ Database**: Persistent storage using SQLite for URL mappings and metadata.
+- **⚙️ Automatic Cleanup**: Expired URLs are deleted daily via a cron job.
 
-### Key Features
-- **Shorten URLs**: Users can submit a long URL, and the app will generate a unique shortened URL.
-- **Expiration**: Each shortened URL expires after a defined TTL (Time To Live), and expired URLs are automatically deleted by a cron job.
-- **Database**: URLs and their details are stored in a SQLite database.
+---
 
-## Design Decisions
+## 📐 Design Decisions
 
 1. **Model Design**: 
-   - `URL` model is used to store long URLs, their shortened version, TTL, and expiration date.
-   - The TTL value is used to calculate the `expires_at` field when creating a new shortened URL.
+   - `URL` model stores long URLs, their shortened versions, and expiration times (based on TTL).
+   - Expiration logic is calculated using the `expires_at` timestamp.
 
-2. **Expiration Logic**: 
-   - URLs are marked as expired based on the `expires_at` timestamp, and expired URLs are deleted using a cron job that runs daily.
+2. **URL Shortening Algorithm**: 
+   - A **Base62 encoding** is used to generate unique and compact short URLs.
 
-3. **Cron Job**:
-   - The cron job is manually set up without additional libraries (such as `django-cron`), but it can be enhanced using libraries for better scheduling.
-   - The cron job queries the database for expired URLs and deletes them automatically.
+3. **Expiration Cron Job**: 
+   - A system cron job queries the database daily to remove expired URLs. This ensures minimal manual intervention.
 
-4. **SQLite Database**: 
-   - SQLite was chosen for simplicity and because it is sufficient for a small web application.
-   
-## Challenges Faced
+4. **Database**: 
+   - SQLite is used for simplicity, making the application lightweight and easy to set up.
 
-1. **URL Shortening Algorithm**: 
-   - Deciding on an appropriate algorithm for generating unique and short URLs was challenging. A base62 encoding was chosen for this purpose.
-   
-2. **Expiration Handling**:
-   - Ensuring that expired URLs are automatically deleted required careful handling of timezones and scheduled tasks. I initially tried setting up the cron job using a third-party library, but ended up using system cron jobs for simplicity.
+5. **Access Statistics**
+   - Tracks and displays the number of times a shortened URL has been accessed.
 
-3. **Database Migrations**: 
-   - Initially, there were issues with database migrations and model changes, but they were resolved after careful database management.
+---
 
-## Setup
+🌐 Live Application
+You can access the application and explore its API through the Django REST Framework browsable interface:
 
-To set up the application, follow these steps:
+🔗 Website Link: http://216.48.179.47:8000/
 
-1. Clone the repository: 
-   git clone [https://github.com/yourusername/url-shortener.git](https://github.com/AmritAnand-2003/URL-Shortener)
-   cd url-shortener
+💡 Features of the Browsable API
+1. Interactive Interface: Test all API endpoints directly in your browser.
 
-2. Create and Activate a Virtual Environment: 
+2. Ease of Use: Navigate and test the APIs without needing an external tool like Postman.
+
+---
+
+## 🛠️ Challenges Faced
+
+1. **URL Generation**: Choosing an efficient and collision-free algorithm for shortening URLs was critical.
+
+---
+
+## 📋 Setup Instructions
+
+### Clone the Repository
+```bash
+git clone https://github.com/AmritAnand-2003/URL-Shortener
+cd url-shortener
+```
+
+### Create and Activate a Virtual Environment
+```bash
 python3 -m venv env
-source env/bin/activate  
+source env/bin/activate
+```
 
-
-3. Install Dependencies: 
+### Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
-4. Apply Migrations
-Run the following commands to create the database and apply migrations: 
+### Apply Database Migrations
+```bash
 python manage.py makemigrations
 python manage.py migrate
+```
 
-6. Start the Development Server: 
+### Run the Development Server
+```bash
 python manage.py runserver
+```
 
+---
+
+## ⚙️ Setting Up the Cron Job for Expired URLs
+
+1. Open the crontab editor:
+   ```bash
+   crontab -e
+   ```
+
+2. Add the following line to schedule the cron job for deleting expired URLs daily:
+   ```bash
+   0 0 * * * /path/to/your/venv/bin/python /path/to/your/project/manage.py delete_expired_urls
+   ```
+
+   Replace `/path/to/your/venv` and `/path/to/your/project` with your environment and project paths.
+
+3. Save and exit the crontab editor.
+
+---
+
+## 📚 Technologies Used
+
+- **Django**: Backend framework for building the web application.
+- **SQLite**: Lightweight database for storing URL mappings.
+- **Cron**: Scheduling tool for managing expired URLs.
+
+---
+
+## 🎯 Future Improvements
+
+- **🔍 Analytics Dashboard**: Track usage statistics for each shortened URL.
+- **🔒 Authentication**: Add user accounts for personalized URL management.
+
+---
