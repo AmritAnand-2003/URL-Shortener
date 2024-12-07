@@ -17,7 +17,7 @@ This is a **simple and efficient URL shortener** web application built with Djan
 ## 📐 Design Decisions
 
 1. **Model Design**: 
-   - `URL` model stores long URLs, their shortened versions, TTL, and expiration times.
+   - `URL` model stores long URLs, their shortened versions, and expiration times (based on TTL).
    - Expiration logic is calculated using the `expires_at` timestamp.
 
 2. **URL Shortening Algorithm**: 
