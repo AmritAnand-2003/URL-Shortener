@@ -31,6 +31,18 @@ This is a **simple and efficient URL shortener** web application built with Djan
 
 ---
 
+🌐 Live Application
+You can access the application and explore its API through the Django REST Framework browsable interface:
+
+🔗 Website Link: http://216.48.179.47:8000/
+
+💡 Features of the Browsable API
+Interactive Interface: Test all API endpoints directly in your browser.
+Detailed Documentation: Each endpoint includes descriptions, parameters, and example requests/responses.
+Ease of Use: Navigate and test the APIs without needing an external tool like Postman.
+
+---
+
 ## 🛠️ Challenges Faced
 
 1. **URL Generation**: Choosing an efficient and collision-free algorithm for shortening URLs was critical.
