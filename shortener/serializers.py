@@ -1,8 +1,9 @@
-from rest_framework import serializers
-from datetime import timedelta
-from django.utils.timezone import now
 from .models import URL
 from .helpers.helper import validate_url
+from datetime import timedelta
+from django.utils.timezone import now
+from rest_framework import serializers
+
 
 class URLShortenerSerializer(serializers.ModelSerializer):
     TTL = serializers.IntegerField(min_value=1, required=False)

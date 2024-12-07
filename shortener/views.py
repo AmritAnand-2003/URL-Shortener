@@ -1,14 +1,14 @@
+from .models import URL
+from .serializers import URLShortenerSerializer, CustomURLShortenerSerializer, URLStatsSerializer
+from .helpers.helper import generate_short_url
+from .constants import BASEURL
+from .helpers.helper import validate_url
 from django.shortcuts import redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import URL
-from .serializers import URLShortenerSerializer, CustomURLShortenerSerializer, URLStatsSerializer
-from .helpers.helper import create_shortened_url, generate_short_url
-from .constants import BASEURL
-from .helpers.helper import validate_url
 
 
 class ShortenURLView(APIView):

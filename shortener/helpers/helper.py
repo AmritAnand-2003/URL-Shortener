@@ -1,8 +1,8 @@
 import re
 import validators
 import random, string
-from shortener.models import URL, URLCounter
 from django.db import transaction
+from shortener.models import URL, URLCounter
 
 
 def validate_url(url):
@@ -10,20 +10,23 @@ def validate_url(url):
         raise ValueError("URL must start with http:// or https://")
     if not validators.url(url):
         raise ValueError("Provided URL is not a valid URL.")
-    url_pattern = re.compile(
-        r'^(http|https)://' 
-        r'([\w-]+\.)+[\w-]{2,4}' 
-        r'(/[\w\-./?%&=]*)?$' 
-    )
-    if not url_pattern.match(url):
-        raise ValueError("URL does not match the required pattern.")
+    # url_pattern = re.compile(
+    #     r'^(http|https)://' 
+    #     r'([\w-]+\.)+[\w-]{2,4}' 
+    #     r'(/[\w\-./?%&=]*)?$' 
+    # )
+    # if not url_pattern.match(url):
+    #     raise ValueError("URL does not match the required pattern.")
     return url
 
 def generate_short_url():
     with transaction.atomic():
         url_counter = URLCounter.objects.select_for_update().get(id=1)
         next_id = url_counter.get_next_id()
-    short_url = base_62_encode(next_id)
+        short_url = base_62_encode(next_id)
+        while URL.objects.filter(short_url=short_url).exists():
+            next_id = url_counter.get_next_id()
+            short_url = base_62_encode(next_id)
     return short_url
 
 
