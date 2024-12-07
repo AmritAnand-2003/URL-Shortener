@@ -65,7 +65,7 @@ class CustomShortenedURLAPIView(APIView):
     """
     API endpoint for creating custom shortened URLs.
     Accepts requests only if custom URL is unique.
-    Format: 216.48.179.47:8000/short_url where short_url is your custom URL path
+    Format: http://216.48.179.47:8000/short_url where short_url is your custom URL path
     """
     serializer_class = CustomURLShortenerSerializer
     def post(self, request):
