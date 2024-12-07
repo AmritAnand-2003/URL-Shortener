@@ -10,8 +10,8 @@ class URL(models.Model):
     original_url = models.URLField()
     short_url = models.CharField(unique=True, max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
-    access_count = models.IntegerField(default=0)
-    expires_at = models.DateTimeField(default=default_expiry())
+    access_count = models.IntegerField(default=0) 
+    expires_at = models.DateTimeField(default=default_expiry, blank=True)
 
     def __str__(self):
         return f"{self.short_url} -> {self.original_url}"
